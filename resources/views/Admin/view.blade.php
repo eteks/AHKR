@@ -1,7 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<?php
 
+//echo "<pre>";
+//
+//print_r($users );
+//echo "</pre>";
+//
+//exit;
+
+?>
 <div class="right_col" role="main">    
     <div class="row tile_count">
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -12,6 +21,10 @@
             </div>
         </div>
     </div>
+    
+    <div class="error"></div>
+    
+    
     <div class="">
         <div class="row">
                       
@@ -36,20 +49,22 @@
                           <th>Name</th>
                           <th>Email</th>
                           <th>Contact</th>    
+                          <th>User Type</th>    
                           <th>Action</th>   
                         </tr>
                       </thead>
                       <tbody>                          
                            @foreach($users as $user)
                              <tr>
-                                <td>{{ $user->user_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->mobile }}</td>
+                                <td id="dt_username">{{ $user->user_name }}</td>
+                                <td id="dt_email">{{ $user->email }}</td>
+                                <td id="dt_mobile">{{ $user->mobile }}</td>
+                                <td id="dt_user_level">{{ $user->user_level }}</td>
                                  <td class="actions">
                                    
                                
-                                    <i data="edit_{{$user['id']}}" class="icon md-edit edit-row" aria-hidden="true"></i>                                    
-                                     <i data="delete_{{$user['id']}}" class="icon md-delete remove-row" aria-hidden="true"></i>
+                                    <i id="{{$user['id']}}" data-target="#editticket" data-toggle="modal" data="edit_{{$user['id']}}" class="fa fa-pencil-square-o edit-row" aria-hidden="true"></i>                                    
+                                     <i id="{{$user['id']}}" data-target="#editticket" data-toggle="modal" data="delete_{{$user['id']}}" class="fa fa-trash-o  del-row" aria-hidden="true"></i>
                                      
                                      
                                   
@@ -64,6 +79,28 @@
               </div>
       </div>
     </div>
+</div>
+<div class="modal fade example-modal-lg" id="editticket" aria-hidden="true" aria-labelledby="exampleOptionalLarge" role="dialog" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">*</span>
+                    </button>
+                    <h4 class="modal-title">
+                        Edit User Details
+                        <span id="pop_invoice"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="example table-responsive">
+                        <div id="examplePopoverTable" >
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+	</div>
 </div>
 
 @endsection
